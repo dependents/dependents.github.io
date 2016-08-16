@@ -1,0 +1,21 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Website for Dependents",
+  "main": "index.html",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pum": "git pull --rebase upstream gh-pages"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dependents/website.git"
+  },
+  "author": "Joel Kemp <joel@mrjoelkemp.com> (http://www.mrjoelkemp.com/)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/dependents/website/issues"
+  },
+  "homepage": "https://github.com/dependents/website#readme"
+}
