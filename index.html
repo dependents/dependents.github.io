@@ -36,12 +36,7 @@
         <p class="header">This project is maintained by <a class="header name" href="https://twitter.com/mrjoelkemp" target="_blank">@mrjoelkemp</a></p>
       </header>
       <section>
-        <h3>
-          <a id="dependents" class="anchor" href="#dependents" aria-hidden="true">
-            <span aria-hidden="true" class="octicon octicon-link"></span>
-          </a>
-          Dependents
-        </h3>
+        <h3>Dependents</h3>
 
         <p>Currently supports JavaScript (AMD, CommonJS, and ES6) and CSS Preprocessor (Sass and Stylus) codebases.</p>
 
@@ -50,7 +45,7 @@
           <li><a href="#configuring-settings">Configuring Settings</a></li>
           <li>
             <a href="#usage">Usage</a>
-            <ul>
+            <ul style="margin: 0;">
               <li><a href="#jump-to-a-dependency">Jump to Dependency</a></li>
               <li><a href="#find-the-dependents-of-the-current-module">Find Dependents</a></li>
               <li><a href="#find-relevant-app-entry-points">Find Relevant App Entry Points</a></li>
@@ -63,230 +58,192 @@
           <li><a href="https://github.com/mrjoelkemp/sublime-dependents/blob/master/Contributing.md">Contributing to Dependents</a></li>
         </ol>
 
-        <h3>
-          <a id="nodejs-dependency" class="anchor" href="#nodejs-dependency" aria-hidden="true">
-            <span aria-hidden="true" class="octicon octicon-link"></span>
-          </a>
-          Node.js Dependency
-        </h3>
+        <h3><a id="installation" class="anchor" href="#nodejs-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Node.js Dependency</h3>
 
-<p>You <strong>must</strong> have <a href="https://nodejs.org/">Node.js</a> installed on your system. Anything v0.10 and above is fine.</p>
+        <p>You <strong>must</strong> have <a href="https://nodejs.org/">Node.js</a> installed on your system. Anything v0.10 and above is fine.</p>
 
-<ul>
-<li>Note: The Node.js windows installer will add the install directory to the <code>PATH</code> variable but you must reboot to reload it.</li>
-</ul>
+        <ul>
+          <li>Note: The Node.js windows installer will add the install directory to the <code>PATH</code> variable but you must reboot to reload it.</li>
+        </ul>
 
-<p>If you have issues with running Node.js from within the package see the <code>node_path</code> setting under <a href="#configuring-settings">configuring settings</a> below.</p>
+        <p>If you have issues with running Node.js from within the package see the <code>node_path</code> setting under <a href="#configuring-settings">configuring settings</a> below.</p>
+        <ul>
+          <li>
+            <p>nvm users will need to supply their <code>node_path</code></p>
+          </li>
+          <li>
+            <p>For a <code>.deprc</code> shared with a team, consider not committing <code>node_path</code> changes (as it's only for your machine).</p>
+            <ul>
+              <li>Run <code>git update-index --assume-unchanged .deprc</code> to ignore changes</li>
+              <li>Run <code>git update-index --no-assume-unchanged .deprc</code> to track changes again</li>
+              <li>This is currently a workaround.</li>
+            </ul>
+          </li>
+        </ul>
 
-<ul>
-<li><p>nvm users will need to supply their <code>node_path</code></p></li>
-<li>
-<p>For a <code>.deprc</code> shared with a team, consider not committing <code>node_path</code> changes (as it's only for your machine).</p>
+        <h3><a id="configuring-settings" class="anchor" href="#configuring-settings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuring settings</h3>
 
-<ul>
-<li>Run <code>git update-index --assume-unchanged .deprc</code> to ignore changes</li>
-<li>Run <code>git update-index --no-assume-unchanged .deprc</code> to track changes again</li>
-<li>This is currently a workaround.</li>
-</ul>
-</li>
-</ul>
+        <p>Put a <code>.deprc</code> file in the root directory of your project. See below for all possible settings.</p>
+        <p>At a minimum, you must specify a <code>root</code> or <code>styles_root</code>.</p>
 
-<h3>
-<a id="configuring-settings" class="anchor" href="#configuring-settings" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuring settings</h3>
+        <pre>
+          <code>{
+            "root": "path/to/all/js/files",
+            "styles_root": "path/to/my/stylesheets",
+            "require_config": "path/to/my/requirejs/config.js",
+            "build_config": "path/to/requirejs/build.json",
+            "webpack_config": "path/to/my/webpack.config.js",
+            "exclude": ['jquery.js', 'require.js', 'vendor']
+          }
+          </code>
+        </pre>
 
-<p>Put a <code>.deprc</code> file in the root directory of your project. See below for all possible settings.</p>
+        <ul>
+          <li>Note: If you want to specify the directory root as a value, please use <code>'./'</code></li>
+          <li>Tip: If you like to open a separate windows in sublime for subdirectories of your project just put a <code>.deprc</code> file there too with the reduced/correct relative paths.</li>
+        </ul>
 
-<p>At a minimum, you must specify a <code>root</code> or <code>styles_root</code>.</p>
+        <p><strong>General Settings</strong></p>
 
-<pre><code>{
-  "root": "path/to/all/js/files",
-  "styles_root": "path/to/my/stylesheets",
-  "require_config": "path/to/my/requirejs/config.js",
-  "build_config": "path/to/requirejs/build.json",
-  "webpack_config": "path/to/my/webpack.config.js",
-  "exclude": ['jquery.js', 'require.js', 'vendor']
-}
-</code></pre>
+        <ul>
+          <li><code>node_path</code>: (Optional) path to your node installation.
+            <ul>
+              <li>A properly set <code>PATH</code> environment variable should preclude having to use this but for unusual cases we provide this setting.</li>
+              <li><code>/usr/local/bin</code> is install path on OSX and Linux.</li>
+              <li>In windows the <code>PATH</code> is set during by the Node.js installer (be sure to reboot).</li>
+            </ul>
+          </li>
+        </ul>
 
-<ul>
-<li>Note: If you want to specify the directory root as a value, please use <code>'./'</code>
-</li>
-<li>Tip: If you like to open a separate windows in sublime for subdirectories of your project just put a <code>.deprc</code>
-file there too with the reduced/correct relative paths.</li>
-</ul>
+        <p><strong>JavaScript Settings</strong></p>
 
-<p><strong>General Settings</strong></p>
+        <ul>
+          <li><code>root</code>: the ultimate/root path at which to limit js dependent searching.</li>
+          <li><code>config</code>: (Optional) the path to your requirejs configuration file</li>
+          <li><code>webpack_config</code>: (Optional) the path to your webpack configuration file</li>
+          <li><code>exclude</code>: (Optional) a list of paths and/or folder names to exclude from the search for dependents
+            <ul>
+              <li>Omitting folders that contain 3rd party libraries can drastically speed up the search for a large codebase.</li>
+              <li>The following folders are excluded by default: <code>node_modules</code>, <code>bower_components</code>, <code>vendor</code></li>
+            </ul>
+          </li>
+          <li><code>build_config</code>: (Optional) path to your RequireJS build configuration file
+            <ul>
+              <li>This can have a "modules" section that lists your bundles (entry points), otherwise we'll search for them automatically</li>
+              <li>Supplying this yields a significant performance speedup when finding relevant app entry points</li>
+            </ul>
+          </li>
+        </ul>
 
-<ul>
-<li>
-<code>node_path</code>: (Optional) path to your node installation.
+        <p><strong>CSS Settings</strong></p>
 
-<ul>
-<li>A properly set <code>PATH</code> environment variable should preclude having to use this but for unusual cases we provide this setting.</li>
-<li>
-<code>/usr/local/bin</code> is install path on OSX and Linux.</li>
-<li>In windows the <code>PATH</code> is set during by the Node.js installer (be sure to reboot).</li>
-</ul>
-</li>
-</ul>
+        <ul>
+          <li><code>styles_root</code>: the ultimate/root path for your stylesheets.
+            <ul>
+              <li>Tip: For Sass, this package works great if you follow the architecture guidelines at <a href="http://sass-guidelin.es/#architecture">sass-guidelines</a>.</li>
+            </ul>
+          </li>
+        </ul>
 
-<p><strong>JavaScript Settings</strong></p>
+        <h3><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
 
-<ul>
-<li>
-<code>root</code>: the ultimate/root path at which to limit js dependent searching.</li>
-<li>
-<code>config</code>: (Optional) the path to your requirejs configuration file</li>
-<li>
-<code>webpack_config</code>: (Optional) the path to your webpack configuration file</li>
-<li>
-<code>exclude</code>: (Optional) a list of paths and/or folder names to exclude from the search for dependents
+        <p>There are four ways to trigger the package's commands</p>
 
-<ul>
-<li>Omitting folders that contain 3rd party libraries can drastically speed up the search for a large codebase.</li>
-<li>The following folders are excluded by default: <code>node_modules</code>, <code>bower_components</code>, <code>vendor</code>
-</li>
-</ul>
-</li>
-<li>
-<code>build_config</code>: (Optional) path to your RequireJS build configuration file
+        <ul>
+          <li>From Main Menu <code>File -&gt; Dependents</code></li>
+          <li>From Context <code>Right click -&gt; Dependents</code></li>
+          <li>Via keyboard <a href="#key-bindings">see the key bindings</a></li>
+          <li>Via mouse click <a href="#mouse-bindings">see the mouse bindings</a></li>
+        </ul>
 
-<ul>
-<li>This can have a "modules" section that lists your bundles (entry points), otherwise we'll search for them automatically</li>
-<li>Supplying this yields a significant performance speedup when finding relevant app entry points</li>
-</ul>
-</li>
-</ul>
+        <h4><a id="jump-to-a-dependency" class="anchor" href="#jump-to-a-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jump to a dependency</h4>
 
-<p><strong>CSS Settings</strong></p>
+        <p>Quickly jump to a file that the current file <a href="https://github.com/imports" class="user-mention">@imports</a> (sass/stylus) or requires (js)</p>
 
-<ul>
-<li>
-<code>styles_root</code>: the ultimate/root path for your stylesheets.
+        <p><img src="http://i.imgur.com/GGlD8Uf.gif?1" alt="Jump to Dependency gif"></p>
 
-<ul>
-<li>Tip: For Sass, this package works great if you follow the architecture guidelines at <a href="http://sass-guidelin.es/#architecture">sass-guidelines</a>.</li>
-</ul>
-</li>
-</ul>
+        <ol>
+          <li>Within a file, place your cursor over the dependency path you want to go to</li>
+          <li>Then trigger the <code>Jump to dependency</code> command in one of the four ways noted above.</li>
+        </ol>
 
-<h3>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
+        <p><em>For javascript</em> if a dependency is aliased, you'll need to supply the path to your requirejs or webpack configuration</p>
 
-<p>There are four ways to trigger the package's commands</p>
+        <h4><a id="find-the-dependents-of-the-current-module" class="anchor" href="#find-the-dependents-of-the-current-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find the dependents of the current module</h4>
 
-<ul>
-<li>From Main Menu <code>File -&gt; Dependents</code>
-</li>
-<li>From Context <code>Right click -&gt; Dependents</code>
-</li>
-<li>Via keyboard <a href="#key-bindings">see the key bindings</a>
-</li>
-<li>Via mouse click <a href="#mouse-bindings">see the mouse bindings</a>
-</li>
-</ul>
+        <p>Dependents are files that immediately depend/require/import the current file.</p>
 
-<h4>
-<a id="jump-to-a-dependency" class="anchor" href="#jump-to-a-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jump to a dependency</h4>
+        <p><img src="http://i.imgur.com/Ol4i7a5.gif" alt="Find Dependents gif"></p>
 
-<p>Quickly jump to a file that the current file <a href="https://github.com/imports" class="user-mention">@imports</a> (sass/stylus) or requires (js)</p>
+        <p>Trigger the <code>Find dependents</code> command in one of the four ways noted above.</p>
 
-<p><img src="http://i.imgur.com/GGlD8Uf.gif?1" alt="Jump to Dependency gif"></p>
+        <ul>
+          <li>If dependents are found, you'll see them in a dropdown.
+            <ul>
+              <li>You can select any of the items in the panel to jump to that file</li>
+              <li>If there's only one dependent, you'll be taken to that dependent file directly.</li>
+            </ul>
+          </li>
+          <li>If no dependents are found a popup will be shown</li>
+        </ul>
 
-<ol>
-<li>Within a file, place your cursor over the dependency path you want to go to</li>
-<li>Then trigger the <code>Jump to dependency</code> command in one of the four ways noted above.</li>
-</ol>
+        <p>You can also open all of the dependents at once:</p>
 
-<p><em>For javascript</em> if a dependency is aliased, you'll need to supply the path to your requirejs or webpack configuration</p>
+        <ol>
+          <li>Within a file, right click to open up a menu</li>
+          <li>Click on <code>Dependents -&gt; Open all dependents</code> to open all dependent files in the editor</li>
+        </ol>
 
-<h4>
-<a id="find-the-dependents-of-the-current-module" class="anchor" href="#find-the-dependents-of-the-current-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find the dependents of the current module</h4>
+        <h4><a id="find-relevant-app-entry-points" class="anchor" href="#find-relevant-app-entry-points" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find relevant app entry points</h4>
 
-<p>Dependents are files that immediately depend/require/import the current file.</p>
+        <p>Find relevant application entry points that depend on the current file somewhere within their dependency tree</p>
 
-<p><img src="http://i.imgur.com/Ol4i7a5.gif" alt="Find Dependents gif"></p>
+        <ol>
+          <li>Within a file, right click to open the context menu</li>
+          <li>Click on <code>Dependents -&gt; Find relevant app entry points</code></li>
+        </ol>
 
-<p>Trigger the <code>Find dependents</code> command in one of the four ways noted above.</p>
+        <p>You can also open all relevant app entry points at once via:</p>
 
-<ul>
-<li>If dependents are found, you'll see them in a dropdown.
+        <ol>
+          <li>Within a file, right click to open the context menu</li>
+          <li>Click on <code>Dependents -&gt; Open all relevant app entry points</code></li>
+        </ol>
 
-<ul>
-<li>You can select any of the items in the panel to jump to that file</li>
-<li>If there's only one dependent, you'll be taken to that dependent file directly.</li>
-</ul>
-</li>
-<li>If no dependents are found a popup will be shown</li>
-</ul>
+        <h4><a id="view-dependency-tree" class="anchor" href="#view-dependency-tree" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View dependency tree</h4>
 
-<p>You can also open all of the dependents at once:</p>
+        <p>View a snapshot of the current file's dependency tree (as a JSON file)</p>
 
-<ol>
-<li>Within a file, right click to open up a menu</li>
-<li>Click on <code>Dependents -&gt; Open all dependents</code> to open all dependent files in the editor</li>
-</ol>
+        <p><img src="http://i.imgur.com/DVwRHbp.gif" alt="View Dependency Tree gif"></p>
 
-<h4>
-<a id="find-relevant-app-entry-points" class="anchor" href="#find-relevant-app-entry-points" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find relevant app entry points</h4>
+        <ol>
+          <li>Within a file, right click to open the context menu</li>
+          <li>Click on <code>Dependents -&gt; View this file's dependency tree</code></li>
+        </ol>
 
-<p>Find relevant application entry points that depend on the current file
-somewhere within their dependency tree</p>
+        <h4><a id="copy-path-to-clipboard" class="anchor" href="#copy-path-to-clipboard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copy path to clipboard</h4>
 
-<ol>
-<li>Within a file, right click to open the context menu</li>
-<li>Click on <code>Dependents -&gt; Find relevant app entry points</code>
-</li>
-</ol>
+        <p>Copy the rootless path of the current module to the clipboard. (JS and Sass)</p>
 
-<p>You can also open all relevant app entry points at once via:</p>
+        <p><img src="http://i.imgur.com/iDNeMUP.gif" alt="Copy Path gif"></p>
 
-<ol>
-<li>Within a file, right click to open the context menu</li>
-<li>Click on <code>Dependents -&gt; Open all relevant app entry points</code>
-</li>
-</ol>
+        <p>For example, if the root is <code>assets/js</code> and the filename is <code>path/to/assets/js/myFeature/file.js</code>, then the command will copy <code>myFeature/file</code> to the clipboard.</p>
 
-<h4>
-<a id="view-dependency-tree" class="anchor" href="#view-dependency-tree" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View dependency tree</h4>
+        <p>This is useful when you want to include the current module as a dependency of another module.</p>
 
-<p>View a snapshot of the current file's dependency tree (as a JSON file)</p>
+        <ol>
+          <li>Within a file, right click to open the context menu</li>
+          <li>Click on <code>Dependents -&gt; Copy path to the clipboard</code></li>
+        </ol>
 
-<p><img src="http://i.imgur.com/DVwRHbp.gif" alt="View Dependency Tree gif"></p>
+        <p>Or via its key binding. Please check with your editor integration of Dependents for key bindings.</p>
 
-<ol>
-<li>Within a file, right click to open the context menu</li>
-<li>Click on <code>Dependents -&gt; View this file's dependency tree</code>
-</li>
-</ol>
-
-<h4>
-<a id="copy-path-to-clipboard" class="anchor" href="#copy-path-to-clipboard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copy path to clipboard</h4>
-
-<p>Copy the rootless path of the current module to the clipboard. (JS and Sass)</p>
-
-<p><img src="http://i.imgur.com/iDNeMUP.gif" alt="Copy Path gif"></p>
-
-<p>For example, if the root is <code>assets/js</code> and the filename is <code>path/to/assets/js/myFeature/file.js</code>,
-then the command will copy <code>myFeature/file</code> to the clipboard.</p>
-
-<p>This is useful when you want to include the current module as a dependency of another module.</p>
-
-<ol>
-<li>Within a file, right click to open the context menu</li>
-<li>Click on <code>Dependents -&gt; Copy path to the clipboard</code>
-</li>
-</ol>
-
-<p>Or via its key binding. Please check with your editor integration of Dependents for key bindings.</p>
-
-<p>Feel free to chat with me on <a href="https://gitter.im/mrjoelkemp/Dependents">Gitter</a> if you need help or ping me <a href="https://twitter.com/mrjoelkemp">@mrjoelkemp</a>.</p>
+        <p>Feel free to chat with me on <a href="https://gitter.im/mrjoelkemp/Dependents">Gitter</a> if you need help or ping me <a href="https://twitter.com/mrjoelkemp">@mrjoelkemp</a>.</p>
       </section>
       <footer>
         <p>Copyright, Joel Kemp</p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-
   </body>
 </html>
