@@ -86,17 +86,14 @@
         <p>Put a <code>.deprc</code> file in the root directory of your project. See below for all possible settings.</p>
         <p>At a minimum, you must specify a <code>root</code> or <code>styles_root</code>.</p>
 
-        <pre>
-          <code>{
-            "root": "path/to/all/js/files",
-            "styles_root": "path/to/my/stylesheets",
-            "require_config": "path/to/my/requirejs/config.js",
-            "build_config": "path/to/requirejs/build.json",
-            "webpack_config": "path/to/my/webpack.config.js",
-            "exclude": ['jquery.js', 'require.js', 'vendor']
-          }
-          </code>
-        </pre>
+<pre><code>{
+  "root": "path/to/all/js/files",
+  "styles_root": "path/to/my/stylesheets",
+  "require_config": "path/to/my/requirejs/config.js",
+  "build_config": "path/to/requirejs/build.json",
+  "webpack_config": "path/to/my/webpack.config.js",
+  "exclude": ['jquery.js', 'require.js', 'vendor']
+}</code></pre>
 
         <ul>
           <li>Note: If you want to specify the directory root as a value, please use <code>'./'</code></li>
