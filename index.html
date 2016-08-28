@@ -28,7 +28,8 @@
         <h1 class="header">Dependents</h1>
         <p class="header">Use any editor, master any codebase</p>
 
-        <ul>
+        <p class="">Supported Editors:</p>
+        <ul id="supported-editors">
           <li class="download"><a class="" href="https://packagecontrol.io/packages/Dependents">Sublime Text 2/3</a></li>
           <li class="download"><a class="" href="https://atom.io/packages/Dependents">Atom</a></li>
         </ul>
@@ -38,9 +39,13 @@
       <section>
         <h3>Dependents</h3>
 
-        <p>Currently supports JavaScript (AMD, CommonJS, and ES6) and CSS Preprocessor (Sass and Stylus) codebases.</p>
-
+        <p>Currently supported languages:</p>
+        <ul>
+          <li>JavaScript: AMD, CommonJS, and ES6 (with RequireJS and Webpack loader support)</li>
+          <li>CSS preprocessors: Sass and Stylus</li>
+        </ul>
         <ol>
+          <li><a href="#getting-started">Getting Started</a></li>
           <li><a href="#installation">Installation</a></li>
           <li><a href="#configuring-settings">Configuring Settings</a></li>
           <li>
@@ -53,10 +58,15 @@
               <li><a href="#copy-path-to-clipboard">Copy Path to Clipboard</a></li>
             </ul>
           </li>
-          <li><a href="#bindings">Bindings</a></li>
-          <li><a href="#reporting-an-issue">Reporting an Issue</a></li>
           <li><a href="https://github.com/mrjoelkemp/sublime-dependents/blob/master/Contributing.md">Contributing to Dependents</a></li>
         </ol>
+
+        <h3><a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h3>
+        <ul>
+          <li>Create a <a href="#configuring-settings">.deprc file</a> in the root of your project</li>
+          <li>Install the Dependents plugin for a <a href="#supported-editors">supported editor</a></li>
+          <li>Start issuing commands via your editor's menus or hotkeys</li>
+        </ul>
 
         <h3><a id="installation" class="anchor" href="#nodejs-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Node.js Dependency</h3>
 
@@ -144,13 +154,12 @@
 
         <h3><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
 
-        <p>There are four ways to trigger the package's commands</p>
+        <p>There are a few ways to trigger the package's commands:</p>
 
         <ul>
-          <li>From Main Menu <code>File -&gt; Dependents</code></li>
-          <li>From Context <code>Right click -&gt; Dependents</code></li>
-          <li>Via keyboard <a href="#key-bindings">see the key bindings</a></li>
-          <li>Via mouse click <a href="#mouse-bindings">see the mouse bindings</a></li>
+          <li>From one of your editor's menus. See the editor plugin's Readme for more details.</li>
+          <li>By right clicking on a file within your editor</li>
+          <li>Via editor-specific keyboard and mouse bindings</li>
         </ul>
 
         <h4><a id="jump-to-a-dependency" class="anchor" href="#jump-to-a-dependency" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jump to a dependency</h4>
