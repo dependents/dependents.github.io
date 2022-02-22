@@ -1,8 +1,11 @@
 title: Dependents
 description: Use any editor, master any codebase
-google_analytics: 
-show_downloads: true
+google_analytics:
+show_downloads: false
 theme: jekyll-theme-dinky
 
-gems:
+plugins:
   - jekyll-mentions
+
+twitter:
+  username: getdependents
